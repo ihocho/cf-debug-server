@@ -1,6 +1,7 @@
 package cf_debug_server
 
 import (
+	"fmt"
 	"flag"
 	"io/ioutil"
 	"net/http"
@@ -38,6 +39,9 @@ func Runner(address string, sink *lager.ReconfigurableSink) ifrit.Runner {
 }
 
 func Run(address string, sink *lager.ReconfigurableSink) (ifrit.Process, error) {
+	fmt.Println("address:" + address);
+	fmt.Println("sink:" + sink);
+	
 	p := ifrit.Invoke(Runner(address, sink))
 	select {
 	case <-p.Ready():
